@@ -1,7 +1,7 @@
 package com.patrick.crud.controller.impl;
 
 import com.patrick.crud.controller.UserResource;
-import com.patrick.crud.entity.User;
+import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ public class UserResourceImpl implements UserResource {
     private final UserService userService;
 
     @Override
-    public ResponseEntity<User> findById(Long id) {
+    public ResponseEntity<UserResponse> findById(Long id) {
         return ResponseEntity.ok().body(userService.findById(id));
     }
 }
