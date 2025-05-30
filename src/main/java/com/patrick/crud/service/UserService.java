@@ -1,6 +1,7 @@
 package com.patrick.crud.service;
 
-import com.patrick.crud.entity.User;
+import com.patrick.crud.mapper.UserMapper;
+import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public User findById(final Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserResponse findById(final Long id) {
+        return userMapper.fromEntity(
+                userRepository.findById(id).orElse(null)
+        );
     }
 }
