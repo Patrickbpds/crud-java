@@ -6,8 +6,7 @@ import java.io.Serializable;
 public record UserResponse(
         Long id,
         String name,
-        String email,
-        String password
+        String email
 ) implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
