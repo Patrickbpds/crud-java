@@ -11,7 +11,7 @@ import lombok.With;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "crud_users")
+@Table(name = "crud_users", schema = "crud_tables")
 public class User {
 
     @Id
