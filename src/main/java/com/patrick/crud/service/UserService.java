@@ -14,10 +14,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserResponse findById(final Long id) {
+    public UserResponse findById(final Long publicId) {
         return userMapper.fromEntity(
-                userRepository.findById(id).orElseThrow(() ->
-                        new ResourceNotFoundExceptions("Object not found with id: " + id +
+                userRepository.findByPublicId(publicId).orElseThrow(() ->
+                        new ResourceNotFoundExceptions("Object not found with id: " + publicId +
                                 " Type: "+ UserResponse.class.getSimpleName()))
         );
     }
