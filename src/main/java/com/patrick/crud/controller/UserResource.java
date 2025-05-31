@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/users")
 public interface UserResource {
 
-    @GetMapping("/{id}")
-    ResponseEntity<UserResponse> findById(@PathVariable(name="id") final Long id);
+    @GetMapping("/{publicId}")
+    ResponseEntity<UserResponse> findById(@PathVariable(name="publicId") final Long publicId);
 
 
 }

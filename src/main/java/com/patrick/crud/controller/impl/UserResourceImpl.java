@@ -14,7 +14,7 @@ public class UserResourceImpl implements UserResource {
     private final UserService userService;
 
     @Override
-    public ResponseEntity<UserResponse> findById(Long id) {
-        return ResponseEntity.ok().body(userService.findById(id));
+    public ResponseEntity<UserResponse> findById(Long publicId) {
+        return ResponseEntity.ok().body(userService.findById(publicId));
     }
 }
