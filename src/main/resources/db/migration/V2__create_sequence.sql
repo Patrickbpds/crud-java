@@ -1,0 +1,6 @@
+CREATE SEQUENCE IF NOT EXISTS crud_tables.public_id_sequence
+    START WITH 1000000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
