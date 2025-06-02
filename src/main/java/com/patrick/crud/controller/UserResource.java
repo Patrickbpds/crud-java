@@ -3,6 +3,7 @@ package com.patrick.crud.controller;
 import com.patrick.crud.controller.exceptions.Error;
 import com.patrick.crud.models.responses.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,7 +37,7 @@ public interface UserResource {
     })
     @GetMapping("/{publicId}")
     ResponseEntity<UserResponse> findById(
+            @Parameter(description = "Public ID of the user to be found", required = true, example = "1000000000013060480")
             @PathVariable(name="publicId") final Long publicId);
-
 
 }
