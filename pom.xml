@@ -73,11 +73,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Validation API
+        <!-- Validation API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency> -->
+        </dependency>
 
         <!-- BCrypt (via Spring Security)
         <dependency>
@@ -102,12 +102,12 @@
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
-        <!-- Swagger/OpenAPI for Documentation
+        <!-- Swagger/OpenAPI for Documentation -->
         <dependency>
           <groupId>org.springdoc</groupId>
           <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
           <version>2.8.8</version>
-        </dependency> -->
+        </dependency>
 
         <!-- Spring Boot Testing -->
         <dependency>
