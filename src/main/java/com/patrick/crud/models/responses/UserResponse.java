@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 public record UserResponse(
-        Long publicId,
+        String publicId,
         String name,
         String email
 ) implements Serializable {

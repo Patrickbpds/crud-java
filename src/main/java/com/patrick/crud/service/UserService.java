@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserResponse findById(final Long publicId) {
+    public UserResponse findById(final String publicId) {
         return userMapper.fromEntity(
                 userRepository.findByPublicId(publicId).orElseThrow(() ->
                         new ResourceNotFoundExceptions("Object not found with id: " + publicId +
