@@ -37,7 +37,8 @@ public interface UserResource {
     })
     @GetMapping("/{publicId}")
     ResponseEntity<UserResponse> findById(
-            @Parameter(description = "Public ID of the user to be found", required = true, example = "1000000000013060480")
+            @Parameter(description = "Public ID of the user to be found",
+                    required = true, example = "180302")
             @PathVariable(name="publicId") final String publicId);
 
 }
