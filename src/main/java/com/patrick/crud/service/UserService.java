@@ -2,6 +2,7 @@ package com.patrick.crud.service;
 
 import com.patrick.crud.mapper.UserMapper;
 import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
+import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,9 @@ public class UserService {
                         new ResourceNotFoundExceptions("Object not found with id: " + publicId +
                                 " Type: "+ UserResponse.class.getSimpleName()))
         );
+    }
+
+    public void save(CreateUserRequest createUserRequest) {
+        userRepository.save(userMapper.fromRequest(createUserRequest));
     }
 }
