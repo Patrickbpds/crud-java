@@ -21,7 +21,7 @@ public class ControllerExceptionHandler {
                         .timestamp(now())
                         .status(NOT_FOUND.value())
                         .error(NOT_FOUND.getReasonPhrase())
-                        .message(ex.getMessage())
+                        .message(ex.getReason())
                         .path(request.getRequestURI())
                         .build()
         );
