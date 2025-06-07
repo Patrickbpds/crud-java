@@ -21,6 +21,7 @@ public interface UserResource {
 
     @Operation(summary = "Find user by id")
     @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User found"),
             @ApiResponse(
                     responseCode = "404", description = "User not found",
                     content = @Content(
