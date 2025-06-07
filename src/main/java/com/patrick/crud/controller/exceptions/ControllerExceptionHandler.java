@@ -3,6 +3,7 @@ package com.patrick.crud.controller.exceptions;
 import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
 import com.patrick.crud.models.exceptions.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,6 +33,22 @@ public class ControllerExceptionHandler {
                         .build()
         );
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    ResponseEntity<Error> handleDataIntegrityViolationException(
+            final DataIntegrityViolationException ex, final HttpServletRequest request)
+    {
+        return ResponseEntity.status(BAD_REQUEST).body(
+                Error.builder()
+                        .timestamp(now())
+                        .status(BAD_REQUEST.value())
+                        .error(BAD_REQUEST.getReasonPhrase())
+                        .message(ex.getMessage())
+                        .path(request.getRequestURI())
+                        .build()
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ValidationException> handleMethodArgumentNotValidException(
             final MethodArgumentNotValidException ex, final HttpServletRequest request)
