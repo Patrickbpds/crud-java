@@ -24,13 +24,13 @@ public interface UserResource {
             @ApiResponse(
                     responseCode = "404", description = "User not found",
                     content = @Content(
-                        mediaType = "application/json",
+                        mediaType = MediaType.APPLICATION_JSON_VALUE,
                         schema = @Schema(implementation = Error.class)
                     )),
             @ApiResponse(
                     responseCode = "500", description = "Internal server error",
                     content = @Content(
-                            mediaType = "application/json",
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = Error.class)
                     )),
 
