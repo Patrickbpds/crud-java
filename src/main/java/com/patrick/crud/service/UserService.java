@@ -6,6 +6,7 @@ import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +25,15 @@ public class UserService {
     }
 
     public void save(CreateUserRequest createUserRequest) {
+        verifyEmailAlreadyExists(createUserRequest.email(), null);
         userRepository.save(userMapper.fromRequest(createUserRequest));
     }
+
+    private void verifyEmailAlreadyExists(final String email, final String publicId) {
+        userRepository.findByEmail(email)
+                .filter(user -> !user.getPublicId().equals(publicId))
+                .ifPresent(user -> {
+                    throw new DataIntegrityViolationException("Email already exists: " + email);
+                });
+        }
 }
