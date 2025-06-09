@@ -4,6 +4,7 @@ import com.patrick.crud.entity.User;
 import com.patrick.crud.mapper.UserMapper;
 import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
 import com.patrick.crud.models.requests.CreateUserRequest;
+import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,13 @@ public class UserService {
                 .map(userMapper::fromEntity)
                 .toList();
     }
+
+
+public UserResponse update(final String publicId, final UpdateUserRequest updateUserRequest) {
+        User entity = find(publicId);
+        verifyEmailAlreadyExists(updateUserRequest.email(), publicId);
+        final var newEntity = userRepository.save(userMapper.update(updateUserRequest, entity));
+        return userMapper.fromEntity(newEntity);}
 
     private User find(final String publicId) {
         return userRepository.findByPublicId(publicId).orElseThrow(() ->

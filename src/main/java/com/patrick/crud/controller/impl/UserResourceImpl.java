@@ -2,6 +2,7 @@ package com.patrick.crud.controller.impl;
 
 import com.patrick.crud.controller.UserResource;
 import com.patrick.crud.models.requests.CreateUserRequest;
+import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,10 @@ public class UserResourceImpl implements UserResource {
     @Override
     public ResponseEntity<List<UserResponse>> findAll() {
         return ResponseEntity.ok().body(userService.findAll());
+    }
+
+    @Override
+    public ResponseEntity<UserResponse> update(final String publicId, final UpdateUserRequest updateUserRequest) {
+        return ResponseEntity.ok().body(userService.update(publicId, updateUserRequest));
     }
 }
