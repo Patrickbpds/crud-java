@@ -1,5 +1,6 @@
 package com.patrick.crud.service;
 
+import com.patrick.crud.entity.User;
 import com.patrick.crud.mapper.UserMapper;
 import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
 import com.patrick.crud.models.requests.CreateUserRequest;
@@ -19,11 +20,7 @@ public class UserService {
     private final UserMapper userMapper;
 
     public UserResponse findById(final String publicId) {
-        return userMapper.fromEntity(
-                userRepository.findByPublicId(publicId).orElseThrow(() ->
-                        new ResourceNotFoundExceptions("Object not found with id: " + publicId +
-                                " Type: "+ UserResponse.class.getSimpleName()))
-        );
+        return userMapper.fromEntity(find(publicId));
     }
 
     public void save(CreateUserRequest createUserRequest) {
@@ -44,5 +41,11 @@ public class UserService {
                 .stream()
                 .map(userMapper::fromEntity)
                 .toList();
+    }
+
+    private User find(final String publicId) {
+        return userRepository.findByPublicId(publicId).orElseThrow(() ->
+                new ResourceNotFoundExceptions("Object not found with id: " + publicId +
+                        " Type: "+ UserResponse.class.getSimpleName()));
     }
 }
