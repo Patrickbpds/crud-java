@@ -79,11 +79,11 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- BCrypt (via Spring Security)
+        <!-- BCrypt (via Spring Security) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency> -->
+        </dependency>
 
         <!-- PostgreSQL Driver -->
         <dependency>
