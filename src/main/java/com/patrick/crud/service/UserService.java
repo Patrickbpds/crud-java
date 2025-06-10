@@ -9,6 +9,7 @@ import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public UserResponse findById(final String publicId) {
         return userMapper.fromEntity(find(publicId));
@@ -26,7 +28,10 @@ public class UserService {
 
     public void save(CreateUserRequest createUserRequest) {
         verifyEmailAlreadyExists(createUserRequest.email(), null);
-        userRepository.save(userMapper.fromRequest(createUserRequest));
+        userRepository.save(
+                userMapper.fromRequest(createUserRequest)
+                        .withPassword(passwordEncoder.encode(createUserRequest.password()))
+        );
     }
 
     private void verifyEmailAlreadyExists(final String email, final String publicId) {
@@ -48,8 +53,14 @@ public class UserService {
 public UserResponse update(final String publicId, final UpdateUserRequest updateUserRequest) {
         User entity = find(publicId);
         verifyEmailAlreadyExists(updateUserRequest.email(), publicId);
-        final var newEntity = userRepository.save(userMapper.update(updateUserRequest, entity));
-        return userMapper.fromEntity(newEntity);}
+        final var newEntity = userRepository.save(
+                userMapper.update(updateUserRequest, entity)
+                        .withPassword(
+                                updateUserRequest.password() != null ?
+                                        passwordEncoder.encode(updateUserRequest.password())
+                                        : entity.getPassword()));
+        return userMapper.fromEntity(newEntity);
+    }
 
     private User find(final String publicId) {
         return userRepository.findByPublicId(publicId).orElseThrow(() ->
