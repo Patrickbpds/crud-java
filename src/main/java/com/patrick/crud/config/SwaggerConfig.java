@@ -11,11 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ConfigAPI {
+public class SwaggerConfig {
+
+    public static final String SECURITY_SCHEME_NAME = "bearerAuth";
 
     @Bean
     public OpenAPI customOpenAPI() {
-        final String securitySchemeName = "basicAuth";
 
         return new OpenAPI()
                 .info(new Info()
@@ -30,14 +31,16 @@ public class ConfigAPI {
                                 .name("GPL 3.0")
                                 .url("https://www.gnu.org/licenses/gpl-3.0"))
                 )
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
                 .components(
                         new Components()
-                                .addSecuritySchemes(securitySchemeName,
+                                .addSecuritySchemes(SECURITY_SCHEME_NAME,
                                         new SecurityScheme()
-                                                .name(securitySchemeName)
+                                                .name(SECURITY_SCHEME_NAME)
                                                 .type(SecurityScheme.Type.HTTP)
-                                                .scheme("basic")
+                                                .scheme("bearer")
+                                                .bearerFormat("JWT")
+                                                .description("JWT Authorization header using the Bearer scheme")
                                 )
                 );
     }
