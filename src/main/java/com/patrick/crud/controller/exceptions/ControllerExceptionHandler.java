@@ -6,6 +6,7 @@ import com.patrick.crud.models.exceptions.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -67,4 +68,19 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.badRequest().body(error);
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    ResponseEntity<Error> handleBadCredentialsException(
+            final BadCredentialsException ex, final HttpServletRequest request) {
+        return ResponseEntity.status(UNAUTHORIZED).body(
+                Error.builder()
+                        .timestamp(now())
+                        .status(UNAUTHORIZED.value())
+                        .error(UNAUTHORIZED.getReasonPhrase())
+                        .message("Invalid credentials")
+                        .path(request.getRequestURI())
+                        .build()
+        );
+    }
+
 }
