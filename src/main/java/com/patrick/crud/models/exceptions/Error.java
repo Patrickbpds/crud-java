@@ -1,4 +1,4 @@
-package com.patrick.crud.controller.exceptions;
+package com.patrick.crud.models.exceptions;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
