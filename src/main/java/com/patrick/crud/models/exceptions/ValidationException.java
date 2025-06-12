@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuperBuilder
@@ -20,6 +21,9 @@ public class ValidationException extends Error {
     }
 
     public void addError(final String fieldName, final String message) {
+            if (this.errors == null) {
+                this.errors = new ArrayList<>();
+        }
         this.errors.add(new FieldError(fieldName, message));
     }
 }
