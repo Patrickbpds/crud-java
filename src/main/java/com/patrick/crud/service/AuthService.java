@@ -7,6 +7,7 @@ import com.patrick.crud.models.requests.TokenResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,12 +47,13 @@ public class AuthService {
     } catch (AuthenticationException ex) {
         log.warn("Login failure for {}: {}", loginRequest.email(), ex.getMessage());
         throw new BadCredentialsException("Invalid credentials");
-    }}
+    }
+}
 
 
     public void register(CreateUserRequest createUserRequest) {
         if (userRepository.findByEmail(createUserRequest.email()).isPresent()) {
-            throw new IllegalArgumentException("Email already registered");
+            throw new DataIntegrityViolationException("Email already registered");
         }
         var user = UserMapper.fromRequest(createUserRequest);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
