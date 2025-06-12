@@ -1,5 +1,6 @@
 package com.patrick.crud.controller;
 
+import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
 import com.patrick.crud.models.requests.TokenResponse;
@@ -26,11 +27,17 @@ public interface AuthResource {
                     responseCode = "401", description = "Invalid credentials",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = com.patrick.crud.controller.exceptions.Error.class)
+                            schema = @Schema(implementation = Error.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404", description = "User not found",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
                     )),
 
     })
-    @PostMapping("/log-in")
+    @PostMapping("/sign-in")
     ResponseEntity<TokenResponse> login (
         @Parameter(description = "email and password for authentication", required = true)
         @Valid @RequestBody LoginRequest loginRequest);
@@ -39,17 +46,23 @@ public interface AuthResource {
 
     @Operation(summary = "Register a new user to access the authentication token")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "204", description = "User created successfully"),
             @ApiResponse(
-                    responseCode = "400", description = "Invalid data or existing email",
+                    responseCode = "400", description = "Wrong or missing information",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = com.patrick.crud.controller.exceptions.Error.class)
+                            schema = @Schema(implementation = Error.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "409", description = "Email already in use",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
                     )),
 
     })
-    @PostMapping("/sign-up")
+    @PutMapping("/sign-up")
     ResponseEntity<Void> register (
-        @Parameter(description = "Data for creating a user", required = true)
+        @Parameter(description = "Signup a new user given his email and password", required = true)
         @Valid @RequestBody CreateUserRequest createUserRequest);
 }
