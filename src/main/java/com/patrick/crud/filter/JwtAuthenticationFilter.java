@@ -1,4 +1,4 @@
-package com.patrick.crud.config;
+package com.patrick.crud.filter;
 
 import com.patrick.crud.service.JwtService;
 import com.patrick.crud.service.JpaUserDetailsService;
