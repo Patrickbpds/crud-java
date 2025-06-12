@@ -1,6 +1,7 @@
 package com.patrick.crud.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.patrick.crud.filter.JwtAuthenticationFilter;
 import com.patrick.crud.service.JpaUserDetailsService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
