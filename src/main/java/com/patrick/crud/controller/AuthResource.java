@@ -29,13 +29,6 @@ public interface AuthResource {
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = Error.class)
                     )),
-            @ApiResponse(
-                    responseCode = "404", description = "User not found",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = Error.class)
-                    )),
-
     })
     @PostMapping("/sign-in")
     ResponseEntity<TokenResponse> login (
