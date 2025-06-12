@@ -1,17 +1,15 @@
 package com.patrick.crud.service;
 
 import com.patrick.crud.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
 
     private final UserRepository repo;
-
-    public JpaUserDetailsService(UserRepository repo) {
-        this.repo = repo;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
