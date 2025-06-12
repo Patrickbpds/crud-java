@@ -25,7 +25,7 @@ public class AuthResourceImpl implements AuthResource {
     @Override
     public ResponseEntity<Void> register(@Valid CreateUserRequest createUserRequest){
         AuthService.register(createUserRequest);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(204).build();
     }
 
 }
