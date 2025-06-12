@@ -1,6 +1,5 @@
 package com.patrick.crud.models.exceptions;
 
-import com.patrick.crud.controller.exceptions.Error;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
