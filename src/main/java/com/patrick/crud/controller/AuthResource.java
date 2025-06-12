@@ -37,7 +37,7 @@ public interface AuthResource {
 
 
 
-    @Operation(summary = "User login to receive the authentication token")
+    @Operation(summary = "Register a new user to access the authentication token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(
