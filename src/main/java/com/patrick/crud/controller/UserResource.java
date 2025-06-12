@@ -1,6 +1,6 @@
 package com.patrick.crud.controller;
 
-import com.patrick.crud.controller.exceptions.Error;
+import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;

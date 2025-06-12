@@ -1,5 +1,6 @@
 package com.patrick.crud.controller.exceptions;
 
+import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
 import com.patrick.crud.models.exceptions.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
