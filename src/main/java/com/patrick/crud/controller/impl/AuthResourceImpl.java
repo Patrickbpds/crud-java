@@ -3,7 +3,7 @@ package com.patrick.crud.controller.impl;
 import com.patrick.crud.controller.AuthResource;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
-import com.patrick.crud.models.requests.TokenResponse;
+import com.patrick.crud.models.responses.TokenResponse;
 import com.patrick.crud.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

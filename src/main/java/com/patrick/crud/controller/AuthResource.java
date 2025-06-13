@@ -3,7 +3,7 @@ package com.patrick.crud.controller;
 import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
-import com.patrick.crud.models.requests.TokenResponse;
+import com.patrick.crud.models.responses.TokenResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

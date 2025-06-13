@@ -1,4 +1,4 @@
-package com.patrick.crud.models.requests;
+package com.patrick.crud.models.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

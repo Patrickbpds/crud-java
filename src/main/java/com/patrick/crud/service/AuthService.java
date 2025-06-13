@@ -3,7 +3,7 @@ package com.patrick.crud.service;
 import com.patrick.crud.mapper.UserMapper;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
-import com.patrick.crud.models.requests.TokenResponse;
+import com.patrick.crud.models.responses.TokenResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
