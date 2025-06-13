@@ -2,6 +2,7 @@ package com.patrick.crud.controller;
 
 import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.requests.CreateUserRequest;
+import com.patrick.crud.models.requests.DeleteUserRequest;
 import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -115,4 +116,33 @@ public interface UserResource {
                     required = true, example = "180302")
             @PathVariable(name="publicId") final String publicId,
             @Valid @RequestBody final UpdateUserRequest updateUserRequest);
+
+    @Operation(summary = "Delete User by Email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User deleted successfully"),
+            @ApiResponse(
+                    responseCode = "400", description = "Invalid Password",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404", description = "User not found",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "500", description = "Internal server error",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
+                    ))
+    })
+    @DeleteMapping("/{email}")
+    ResponseEntity<UserResponse> delete(
+            @Parameter(description = "Email of the user to be deleted",
+                    required = true, example = "patrick@example.com")
+            @PathVariable(name="email") final String email,
+            @Valid @RequestBody final DeleteUserRequest deleteUserRequest);
 }
