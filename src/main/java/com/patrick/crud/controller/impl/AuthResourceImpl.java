@@ -3,6 +3,7 @@ package com.patrick.crud.controller.impl;
 import com.patrick.crud.controller.AuthResource;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
+import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.TokenResponse;
 import com.patrick.crud.service.AuthService;
 import jakarta.validation.Valid;
@@ -25,7 +26,12 @@ public class AuthResourceImpl implements AuthResource {
     @Override
     public ResponseEntity<CreateUserRequest> register(@Valid CreateUserRequest createUserRequest){
         authService.register(createUserRequest);
-        return ResponseEntity.status(204).build();
+        return ResponseEntity.status(201).build();
     }
 
+    @Override
+    public ResponseEntity<Void> update(UpdateUserRequest updateUserRequest) {
+        authService.update(updateUserRequest);
+        return ResponseEntity.ok().build();
+    }
 }

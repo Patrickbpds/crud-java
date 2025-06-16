@@ -3,6 +3,7 @@ package com.patrick.crud.controller;
 import com.patrick.crud.models.exceptions.Error;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
+import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.TokenResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,7 +40,7 @@ public interface AuthResource {
 
     @Operation(summary = "Register a new user to access the authentication token")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "User created successfully"),
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(
                     responseCode = "400", description = "Wrong or missing information",
                     content = @Content(
@@ -55,7 +56,29 @@ public interface AuthResource {
 
     })
     @PutMapping("/sign-up")
-    ResponseEntity<Void> register (
+    ResponseEntity<CreateUserRequest> register (
         @Parameter(description = "Signup a new user given his email and password", required = true)
         @Valid @RequestBody CreateUserRequest createUserRequest);
+
+
+
+@Operation(summary = "Update a user to access the authentication token")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User updated successfully"),
+            @ApiResponse(
+                    responseCode = "400", description = "Invalid request data",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
+                    )),
+            @ApiResponse(
+                    responseCode = "404", description = "User not found",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = Error.class)
+                    )),
+    })
+    @PatchMapping("/update-authentication-data")
+    ResponseEntity<Void> update (
+        @Valid @RequestBody UpdateUserRequest updateUserRequest);
 }
