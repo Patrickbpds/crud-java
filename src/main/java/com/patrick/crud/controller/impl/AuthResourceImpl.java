@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthResourceImpl implements AuthResource {
 
-    private final AuthService AuthService;
+    private final AuthService authService;
 
     @Override
     public ResponseEntity<TokenResponse> login(@Valid LoginRequest loginRequest) {
-        TokenResponse token = AuthService.login(loginRequest);
+        TokenResponse token = authService.login(loginRequest);
         return ResponseEntity.ok(token);
     }
 
     @Override
-    public ResponseEntity<Void> register(@Valid CreateUserRequest createUserRequest){
-        AuthService.register(createUserRequest);
+    public ResponseEntity<CreateUserRequest> register(@Valid CreateUserRequest createUserRequest){
+        authService.register(createUserRequest);
         return ResponseEntity.status(204).build();
     }
 
