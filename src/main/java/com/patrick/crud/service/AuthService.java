@@ -23,7 +23,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserRepository userRepository;
-    private final UserMapper UserMapper;
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
@@ -55,7 +55,7 @@ public class AuthService {
         if (userRepository.findByEmail(createUserRequest.email()).isPresent()) {
             throw new DataIntegrityViolationException("Email already registered");
         }
-        var user = UserMapper.fromRequest(createUserRequest);
+        var user = userMapper.fromRequest(createUserRequest);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         log.info("User {} successfully registered", createUserRequest.email());
