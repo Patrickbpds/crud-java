@@ -3,6 +3,7 @@ package com.patrick.crud.service;
 import com.patrick.crud.mapper.UserMapper;
 import com.patrick.crud.models.requests.CreateUserRequest;
 import com.patrick.crud.models.requests.LoginRequest;
+import com.patrick.crud.models.requests.UpdateUserRequest;
 import com.patrick.crud.models.responses.TokenResponse;
 import com.patrick.crud.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,4 +61,20 @@ public class AuthService {
         userRepository.save(user);
         log.info("User {} successfully registered", createUserRequest.email());
         }
+
+
+    public void update(UpdateUserRequest updateUserRequest) {
+        userRepository.findByEmail(updateUserRequest.email())
+                .map(user -> {
+                    user.setName(updateUserRequest.name());
+
+                    if (updateUserRequest.password() != null && !updateUserRequest.password().trim().isEmpty()){
+                        user.setPassword(bCryptPasswordEncoder.encode(updateUserRequest.password()));
+                    }
+                    userRepository.save(user);
+                    log.info("User {} successfully updated", updateUserRequest.email());
+                    return user;
+                })
+                .orElseThrow(() -> new DataIntegrityViolationException("User not found"));
+    }
 }
