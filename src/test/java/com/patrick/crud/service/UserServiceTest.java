@@ -2,6 +2,7 @@ package com.patrick.crud.service;
 
 import com.patrick.crud.entity.User;
 import com.patrick.crud.mapper.UserMapper;
+import com.patrick.crud.models.exceptions.ResourceNotFoundExceptions;
 import com.patrick.crud.models.responses.UserResponse;
 import com.patrick.crud.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -52,5 +53,21 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findByPublicId("123456");
         verify(userMapper, times(1)).fromEntity(mockUser);
+    }
+
+    @Test
+    void whenCallFindByPublicIdWithInvalidIdThrowResourceNotFoundException() {
+        // Given
+        when(userRepository.findByPublicId(anyString())).thenReturn(Optional.empty());
+
+        // When , Then
+        ResourceNotFoundExceptions exception = Assertions.assertThrows(
+                ResourceNotFoundExceptions.class,
+                () -> userService.findById("123456")
+        );
+        assertTrue(exception.getMessage().contains("Object not found with id: 123456 Type: UserResponse"));
+
+        verify(userRepository, times(1)).findByPublicId("123456");
+        verify(userMapper, times(0)).fromEntity(any(User.class));
     }
 }
